@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--    配置被增强的对象-->
+    <bean id="userDao" class="com.xu.aop.aop.UserDaoImpl"/>
+
+    <bean id="myAspectXML" class="com.xu.aop.aop.MyAspectXML"/>
+
+<!--    AOP配置-->
+    <aop:config>
+        <!--表达式配置哪个类的哪些方法需要增强-->
+        <aop:pointcut id="pointcut1" expression="execution(* com.xu.aop.aop.UserDaoImpl.save(..))"/>
+        <aop:pointcut id="printcut2" expression="execution(* com.xu.aop.aop.UserDaoImpl.delete(..))"/>
+        <aop:pointcut id="pointcut3" expression="execution(* com.xu.aop.aop.UserDaoImpl.update(..))"/>
+        <aop:pointcut id="pointcut4" expression="execution(* com.xu.aop.aop.UserDaoImpl.find(..))"/>
+
+        <aop:aspect ref="myAspectXML">
+<!--            前置通知-->
+            <aop:before method="check" pointcut-ref="pointcut1"/>
+<!--            后置通知-->
+            <aop:after-returning method="writeAft" pointcut-ref="printcut2" returning="result"/>
+<!--            环绕通知-->
+            <aop:around method="around" pointcut-ref="pointcut3" />
+<!--            异常抛出通知-->
+            <aop:after-throwing method="afterThrowing" throwing="ex" pointcut-ref="pointcut4"/>
+<!--            最终通知-->
+            <aop:after method="finalli" pointcut-ref="pointcut4"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

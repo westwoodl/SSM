@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="SpringTX" />
+        <module name="SpringMVC" />
+        <module name="Spring" />
+        <module name="SpringJDBC" />
+        <module name="Mybatis" />
+        <module name="SpringAOP" />
+        <module name="SpringMybatis" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

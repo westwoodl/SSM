@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.mybatis.dao.UserDao">
+    <select id="getUserById" resultType="com.xu.mybatis.pojo.User" parameterType="int">
+        SELECT
+          `id`,
+          `username`,
+          `birthday`,
+          `sex`,
+          `address`
+        FROM
+          `user`
+        WHERE id = #{id2}
+    </select>
+    <select id="getUserByName" resultType="com.xu.mybatis.pojo.User" parameterType="String">
+        select * from `user` where username like '%${value}%'
+<!--         ${} mybatis的字符串拼接指令，不同于#{}，基本类型只能写value-->
+    </select>
+
+    <insert id="insertUser" parameterType="com.xu.mybatis.pojo.User" useGeneratedKeys="true" keyProperty="id">
+<!--        主键返回配置：使用了<selectKey></> userGeneratedKeys就失效了
+                执行mysql函数，并将值附给keyProperty-->
+<!--        <selectKey keyProperty="id" resultType="int" order="AFTER">-->
+<!--            select LAST_INSERT_ID()-->
+<!--        </selectKey>-->
+        <selectKey keyProperty="address" resultType="String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        INSERT INTO `user` (
+          `username`,
+          `birthday`,
+          `sex`,
+          `address`
+        )
+        VALUES
+          (
+            #{username},
+            #{birthday},
+            #{sex},
+            #{address}
+          ) ;
+    </insert>
+
+    <update id="updateUser" parameterType="com.xu.mybatis.pojo.User">
+        UPDATE
+            `user`
+        SET
+            `username` = #{username},
+            `birthday` = #{birthday},
+            `sex` = #{sex},
+            `address` = #{address}
+        WHERE `id` = #{id} ;
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE
+        FROM
+            `user`
+        WHERE `id` = #{id} ;
+    </delete>
+
+
+
+</mapper>

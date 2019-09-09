@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--IOC Inversion of Control控制反转-->
+    <bean id="userService" class="com.xu.spring.day01.service.impl.UserServiceImpl"
+          init-method="init"
+          destroy-method="destory"
+          scope="prototype">
+        <!--DI Dependency injection 依赖注入：-->
+
+        <!--1.set器注入-->
+        <property name="name" value="徐荣村"/>
+        <property name="age" value="1"/>
+
+        <!--2.注入对象类型的依赖，不使用value，而是ref-->
+        <property name="user" ref="user"/>
+    </bean>
+
+    <bean id="user" class="com.xu.spring.day01.domain.User">
+        <!--3.构造器注入-->
+        <constructor-arg name="name" value="User1Name"/>
+        <constructor-arg name="age" value="123"/>
+    </bean>
+</beans>

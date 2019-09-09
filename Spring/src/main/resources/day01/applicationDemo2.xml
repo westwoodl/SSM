@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--p命名空间和SpEL的属性注入-->
+<!--    <bean id="user" class="com.xu.spring.day01.domain.User" p:name="UserPPPName" p:age="123"/>-->
+
+<!--    <bean id="userService" class="com.xu.spring.day01.service.impl.UserServiceImpl"-->
+<!--          p:name="SSSNAMEPPP"-->
+<!--          p:age="321"-->
+<!--          p:user-ref="user"/>-->
+
+    <bean id="user" class="com.xu.spring.day01.domain.User">
+        <property name="name" value="#{'SpELNAME'}"/>
+        <property name="age" value="#{12312}"/>
+    </bean>
+
+    <bean id="userService" class="com.xu.spring.day01.service.impl.UserServiceImpl"
+          p:name="SSSNAMEPPP"
+          p:age="321"/>
+
+    <!--注入集合数组-->
+    <bean id="collection" class="com.xu.spring.day01.domain.Collection">
+        <property name="arr">
+            <list>
+                <value>hhh</value>
+                <value>xxx</value>
+                <value>yyy</value>
+            </list>
+        </property>
+        <property name="list">
+            <list>
+                <ref bean="user"/>
+            </list>
+        </property>
+        <!--注入map-->
+        <property name="map">
+            <map>
+                <entry key="1" value-ref="user"/>
+                <entry key="2" value-ref="user"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>
