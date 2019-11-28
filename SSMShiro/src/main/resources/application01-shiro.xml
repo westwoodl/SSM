@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.xu.realm"/>
+
+    <!--    创建凭证匹配器-->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5" />
+        <property name="hashIterations" value="2"  />
+    </bean>
+
+    <!--    创建User Realm-->
+    <bean id="userRealm" class="com.xu.realm.UserRealm">
+        <!--        注入凭证匹配器-->
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+<!--    创建安全管理器-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" >
+        <property name="realm" ref="userRealm" />
+    </bean>
+
+<!--    web过滤器-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"  >
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/index.jsp" />
+        <property name="unauthorizedUrl" value="/refuse.jsp" />
+        <property name="filterChainDefinitions" >
+            <value>
+                /js/*=anon
+                /easyui/8=anon
+                /index.jsp*=anon
+                /login/toLogin*=anon
+                /login/login*=anon
+                /login/logout=logout
+
+                /**=authc
+            </value>
+        </property>
+    </bean>
+
+</beans>

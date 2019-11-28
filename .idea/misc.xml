@@ -4,6 +4,10 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/Spring" />
     <file type="web" url="file://$PROJECT_DIR$/SpringMVC" />
+    <file type="web" url="file://$PROJECT_DIR$/SSMShiro" />
+  </component>
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

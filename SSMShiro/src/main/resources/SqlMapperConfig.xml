@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--    加载properties配置文件-->
+<!--    为实体类配置别名-->
+<!--   交给spring-->
+
+
+<!--加载映射文件-->
+<!--    <mappers>-->
+<!--        <mapper resource="mapper/*.xml" />-->
+
+<!--    </mappers>-->
+
+<!--    <mappers>-->
+<!--        <mapper resource="com/xu/dao/*.xml" />-->
+<!--    </mappers>-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+</configuration>

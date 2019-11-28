@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="SpringTX" />
         <module name="SpringMVC" />
+        <module name="SSMShiro" />
         <module name="Spring" />
         <module name="SpringJDBC" />
         <module name="Mybatis" />
